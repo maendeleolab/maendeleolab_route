@@ -46,7 +46,7 @@ export ENV_FPATH="/home/ubuntu"
 ```
 
 ## [Dependencies](#Dependencies)
-### The route table scripts need access to the following constructs
+### The route table scripts need access to the following constructs.
 - [maendeleolab_vpc](https://github.com/maendeleolab/maendeleolab_vpc) 
 - [maendeleolab_subnet](https://github.com/maendeleolab/maendeleolab_subnet)
 
