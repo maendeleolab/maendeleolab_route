@@ -2,12 +2,12 @@
 
 from maendeleolab_lib import *
 
-regions_list = [
+maendeleolab_infra = [
     'us-east-1',
     'us-west-2',
     ]
 
-for region in regions_list:
+for region in maendeleolab_infra:
     #Creates private route table NetworkDev1_Private
     make_route_table(
         Route_table_name='NetworkDev1_Private',
