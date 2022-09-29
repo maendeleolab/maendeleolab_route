@@ -27,10 +27,10 @@ def verify_route(route_name, region='us-east-1'):
         output = os.popen('aws ec2 describe-route-tables --filters Name=tag:Name,Values=' + route_name + ' --region '+ region).read()
         route_data = json.loads(str(output))
         if len(route_data['RouteTables']) > 0:
-                print(route_name + ' already exists in {region}!...')
+                print(f'{route_name} already exists in {region}!...')
                 return 1
     except Exception as err:
-        logging.info('Logging "verify_route" error {err} in {region} to route.log...')
+        logging.info(f'Logging "verify_route" error {err} in {region} to route.log...')
         print(f'Logging "verify_route" error {err} in {region} to route.log...')
 
 #create route table
@@ -45,7 +45,7 @@ def make_route_table(**kwargs):
                 --vpc-id " + kwargs['Vpc_Id'] + "\
                 --region " + kwargs['Region'] 
             )
-            logging.info('Created route:' + kwargs['Route_table_name'])
+            logging.info(f'Created route: {kwargs["Route_table_name"]} in {kwargs["Region"]}...')
             print(f'Created route: {kwargs["Route_table_name"]} in {kwargs["Region"]}...')
     except Exception as err:
         logging.info(f'Logging "make_route_table" error {err} in {kwargs["Region"]} to route.log...')
@@ -89,7 +89,7 @@ def make_route_to_nat_gateway(**kwargs):
             --region " + kwargs['Region'] 
         )
         logging.info('Created route for destination network:' + kwargs['Destination_network'] + ' in route table:' + kwargs['Route_table_Id'])
-        print('Added route entry: {kwargs["Destination_network"]} in route table: {kwargs["Route_table_Id"] in {kwargs["Region"]}...')
+        print(f'Added route entry: {kwargs["Destination_network"]} in route table: {kwargs["Route_table_Id"]} in {kwargs["Region"]}...')
     except Exception as err:
         logging.info(f'Logging "make_route_to_nat_gateway" error {err} in {kwargs["Region"]} to route.log...')
         print(f'Logging "make_route_to_nat_gateway" error {err} in {kwargs["Region"]} to route.log...')
@@ -175,8 +175,8 @@ def make_association(**kwargs):
                 --subnet-id " + kwargs['Subnet_name'] + " \
                 --region " + kwargs['Region']
         )
-        logging.info(f'Associate subnet:{kwargs["Subnet_name"] to route table:{kwargs["Route_table_name"]} in {kwargs["Region"]}...')
-        print(f'Associate subnet:{kwargs["Subnet_name"] to route table:{kwargs["Route_table_name"]} in {kwargs["Region"]}...')
+        logging.info(f'Associate subnet:{kwargs["Subnet_name"]} to route table:{kwargs["Route_table_name"]} in {kwargs["Region"]}...')
+        print(f'Associate subnet:{kwargs["Subnet_name"]} to route table:{kwargs["Route_table_name"]} in {kwargs["Region"]}...')
     except Exception as err:
         logging.info(f'Logging "make_association" error {err} in kwargs["Region"] to route.log...')
         print(f'Logging "make_association" error {err} in kwargs["Region"] to route.log...')
