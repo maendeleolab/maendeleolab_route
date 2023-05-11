@@ -3,13 +3,6 @@
 
 <img src="/images/banner.png" width=400>
 
-```
-├── build_route.py
-├── delete_resources.py
-├── deploy_NetworkDev1.py
-├── maendeleolab_lib.py
-└── route.log
-```
 
 ## [Context](#Context)
 
@@ -75,13 +68,17 @@ cd maendeleolab_route
 Remember to use it to monitor your environment or troubleshoot an issue.
 
 ```
-README.md
-LICENSE
-images
-build_route.py
-delete_resources.py
-NetworkDev1.py
-maendeleolab_lib.py
+├── LICENSE
+├── README.md
+├── add_route_entries.py
+├── build_route.py
+├── delete_resources.py
+├── delete_routes_list.py
+├── deploy_NetworkDev1.py
+├── maendeleolab_lib.py
+├── remove_route_entries.py
+├── route.log
+└── routes_list.py
 ```
 
 **6**  - I recommend running the script **deploy_NetworkDev1.py** to see what the expected results look like.
@@ -161,7 +158,6 @@ If you find this script useful, please support it with a shout out on your favor
 ```
 Twitter : @maendeleolab
 Instagram : @maendeleolab
-TitTok : @pat_maendeleolab
 ```
 ## [License](#License)
 GNU GENERAL PUBLIC LICENSE
