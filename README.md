@@ -13,7 +13,7 @@
 
 ## [Context](#Context)
 
-- This repo was built to create route tables. 
+- This repo was built to create route tables, add route entries and remove routes. 
 
 - It can be used on any Linux environment in AWS or on-premises. 
 
@@ -109,6 +109,50 @@ This means, if the route table name doesn't have any subnets and route entries a
 ```
 
 **11** - If you get to this step, congratulations for being brave to do it! 
+
+- [] **Additonal scripts usage**
+
+You can use **routes_list.py** to define your route entries like prefix list.</br>
+```
+# Examples of routes lists
+useast1_app_list = ['10.1.33.0/24', '10.11.3.0/24', '10.0.3.0/24']
+useast1_dev_list = ['100.1.33.0/24', '100.11.3.0/24', '100.0.3.0/24']
+```
+
+Use **add_route_entries.py** to add routes to route tables.</br>
+You specify the ENI ID, the routes list, the tag name of the route table and the region.</br>
+```
+# Replace the eni id with yours and 'DEFAULT' with the tage name of your route table.
+for route in routes_list.useast1_app_list:
+    make_route_to_interface_id(
+        Interface_id='eni-0ffgeeff0dd7f8dc9', # This can be the interface id of a gateway load balancer endpoint
+        Destination_network=route,
+        Route_table_Id=get_RouteTableId('DEFAULT','us-east-1'), # Route table name based on tag name
+        Region='us-east-1',
+    )
+# When ready execute this command
+./add_route_entries.py
+``` 
+
+Use **delete_routes_list.py** to define the route entries list to delete from a route table.
+```
+useast1_app_list = ['10.1.33.0/24', ]
+useast1_dev_list = ['100.1.33.0/24', '100.0.3.0/24']
+```
+
+Use **delete_route_entries.py** to delete routes from route tables.</br>
+You specify the ENI ID, the routes list, the tag name of the route table and the region.</br>
+```
+# Replace the eni id with yours and 'DEFAULT' with the tage name of your route table.
+for route in delete_routes_list.useast1_app_list:
+    delete_route_entries(
+        get_RouteTableId('DEFAULT','us-east-1'), # route_table
+        route, # route entry
+        'us-east-1', # region
+    )
+# When ready execute this command
+./delete_route_entries.py
+```
 
 ## [Support](#Support)
 If you find this script useful, please support it with a shout out on your favorite social media platform!

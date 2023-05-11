@@ -216,6 +216,28 @@ def erase_route_entries(route_table, region='us-east-1'):
         logging.info(f'Logging "erase_route_entries" error {err} in {region} to route.log...')
         print(f'Logging "erase_route_entries" error {err} in {region} to route.log...')
 
+def delete_route_entries(route_table, route, region='us-east-1'):
+    try:
+        ''' Deletes route entries '''
+        output = os.popen('aws ec2 describe-route-tables  --region ' + region).read()
+        route_data = json.loads(str(output))
+        for data in route_data['RouteTables']:
+            #print(data['RouteTableId'])
+            if data['RouteTableId'] == route_table:
+                print(f'Delete route entries in {route_table}...')
+                for entry in data['Routes']:
+                    #logging.info('Logging erase_route_entries: ' + data)
+                    if entry["DestinationCidrBlock"] == route:
+                        print(f'Removing {entry["DestinationCidrBlock"]} from {route_table}...')
+                        os.system('aws ec2 delete-route --destination-cidr-block '+ route + '\
+                                --route-table-id '+ route_table)
+
+        new_data = json.dumps(data, indent=2)
+        print(new_data)
+    except Exception as err:
+        logging.info(f'Logging "delete_route_entries" error {err} in {region} to route.log...')
+        print(f'Logging "delete_route_entries" error {err} in {region} to route.log...')
+
 def erase_routes(region='us-east-1'):
     try:
         ''' Deletes all routes that do not have any dependencies '''
