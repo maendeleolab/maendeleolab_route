@@ -10,6 +10,8 @@ sys.path.append(FPATH+'/maendeleolab_vpc')
 import build_vpc
 sys.path.append(FPATH+'/maendeleolab_subnet')
 import build_subnet
+sys.path.append(FPATH+'/maendeleolab_prefixList')
+import build_prefix_list
 #sys.path.append(FPATH+'/maendeleolab_transitGateway')
 #import build_transit_gateway
 #sys.path.append(FPATH+'/maendeleolab_natGateway')

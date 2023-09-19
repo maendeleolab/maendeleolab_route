@@ -42,6 +42,7 @@ export ENV_FPATH="/home/ubuntu"
 ### The deploy script needs to access the build scripts in the following projects. 
 - [maendeleolab_vpc](https://github.com/maendeleolab/maendeleolab_vpc) 
 - [maendeleolab_subnet](https://github.com/maendeleolab/maendeleolab_subnet)
+- [maendeleolab_prefixList](https://github.com/maendeleolab/maendeleolab_prefixList)
 
 ## [Walk-through](#Walk-through)
 
@@ -109,27 +110,7 @@ This means, if the route table name doesn't have any subnets and route entries a
 
 - [] **Additonal scripts usage**
 
-You can use **routes_list.py** to define your route entries like prefix list.</br>
-```
-# Examples of routes lists
-useast1_app_list = ['10.1.33.0/24', '10.11.3.0/24', '10.0.3.0/24']
-useast1_dev_list = ['100.1.33.0/24', '100.11.3.0/24', '100.0.3.0/24']
-```
-
-Use **add_route_entries.py** to add routes to route tables.</br>
-You specify the ENI ID, the routes list, the tag name of the route table and the region.</br>
-```
-# Replace the eni id with yours and 'DEFAULT' with the tage name of your route table.
-for route in routes_list.useast1_app_list:
-    make_route_to_interface_id(
-        Interface_id='eni-0ffgeeff0dd7f8dc9', # This can be the interface id of a gateway load balancer endpoint
-        Destination_network=route,
-        Route_table_Id=get_RouteTableId('DEFAULT','us-east-1'), # Route table name based on tag name
-        Region='us-east-1',
-    )
-# When ready execute this command
-./add_route_entries.py
-``` 
+**add_prefixlist_entries_to_endpoint.py** was added on 9/19/2023.</br>
 
 Use **delete_routes_list.py** to define the route entries list to delete from a route table.
 ```
